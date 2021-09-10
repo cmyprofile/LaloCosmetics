@@ -1,1 +1,1 @@
-# http://LaloCosmetics
+# https://LaloCosmetics
