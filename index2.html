@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Produtos</title>
+    <style>
+        #produtos{
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 2%;
+            display: flex;
+        }
+        #carrinho{
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 2%;
+            display: block;
+        }
+        .produto-single{
+            width: 33.3%;
+            padding: 0 20px;
+        }
+
+    </style>
+</head>
+<body>
+    <div id="produtos">
+        <h2>Vitrine</h2>
+    </div>
+
+    <div id="carrinho">
+        <h2>Carrinho</h2>
+    </div>
+
+    <script>
+        const items = [
+            {
+                id:0,
+                nome:'camiseta',
+                img:'img.png',
+                quantidade:0
+            },
+            {
+                id:1,
+                nome:'shot',
+                img:'img.png',
+                quantidade:0
+            },
+            {
+                id:2,
+                nome:'brusa',
+                img:'img.png',
+                quantidade:0
+            },
+            {
+                id:3,
+                nome:'meia',
+                img:'img.png',
+                quantidade:0
+            },
+            {
+                id:4,
+                nome:'luva',
+                img:'img.png',
+                quantidade:0
+            }
+        ]
+
+        inicializarLoja = () => {
+            var containerProdutos = document.getElementById('produtos');
+            items.map((val)=>{
+                containerProdutos.innerHTML += `
+                <div class="produto-single"> 
+                    <img src="`+val.img+`" />
+                    <p>`+val.nome+`</p>
+                    <a key="`+val.id+`" href="#"> Adicionar ao carrinho<a/>
+                </div>
+                `;
+            })
+        }
+
+        inicializarLoja();
+
+        atualizarCarrinho = () => {
+            var containerCarrinho = document.getElementById('carrinho');
+            containerCarrinho.innerHTML = "";
+            items.map((val)=>{
+                if(val.quantidade > 0){
+                    containerCarrinho.innerHTML += `
+                    <p> `+val.nome+` | quantidade: `+val.quantidade+`</p>`
+                }
+            })
+        }
+
+        var links = document.getElementsByTagName("a");
+
+        for (var i = 0; i < links.length; i++){
+            links[i].addEventListener("click",function(){
+                let key = this.getAttribute('key');
+                items[key].quantidade++;
+                atualizarCarrinho();
+                return false;
+            })
+        }
+        
+    </script>
+</body>
+</html>
